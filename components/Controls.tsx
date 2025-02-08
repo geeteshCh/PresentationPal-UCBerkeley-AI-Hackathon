@@ -1,38 +1,34 @@
-// ./components/Controls.tsx
 "use client";
 import { useVoice, VoiceReadyState } from "@humeai/voice-react";
+import { useState, useEffect } from "react";
 import { FaMicrophone } from "react-icons/fa";
-export default function Controls() {
-  const { connect, disconnect, readyState } = useVoice();
-  const className = "px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
 
-  if (readyState === VoiceReadyState.OPEN) {
-    return (
-      <button
-      className={className}
-        onClick={() => {
-          disconnect();
-        }}
-      >
-       <FaMicrophone className="text-red-600"></FaMicrophone>
-      </button>
-    );
-  }
+export default function MicrophoneButton() {
+  const { connect, disconnect, readyState, isListening } = useVoice();
+  const [micAnimation, setMicAnimation] = useState("");
+
+  useEffect(() => {
+    if (isListening) {
+      setMicAnimation("animate-pulse");
+    } else {
+      setMicAnimation("");
+    }
+  }, [isListening]);
 
   return (
-    <button
-    className={className}
-      onClick={() => {
-        connect()
-          .then(() => {
-            /* handle success */
-          })
-          .catch(() => {
-            /* handle error */
-          });
-      }}
-    >
-      <FaMicrophone></FaMicrophone>
-    </button>
+    <div className="flex justify-center items-center py-4 shadow-md">
+      <button
+        className={`w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl cursor-pointer shadow-lg transition-transform duration-200 ${micAnimation}`}
+        onClick={() => {
+          if (readyState === VoiceReadyState.OPEN) {
+            disconnect();
+          } else {
+            connect().catch(() => {});
+          }
+        }}
+      >
+        <FaMicrophone className={readyState === VoiceReadyState.OPEN ? "text-red-600" : "text-white"} />
+      </button>
+    </div>
   );
 }

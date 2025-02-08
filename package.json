@@ -11,6 +11,7 @@
   "dependencies": {
     "@humeai/voice": "^0.1.8",
     "@humeai/voice-react": "^0.1.8",
+    "lucide-react": "^0.475.0",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
