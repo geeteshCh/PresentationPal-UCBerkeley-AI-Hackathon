@@ -14,11 +14,11 @@ export default function Controls() {
       {/* Left Sidebar */}
       <div className="w-1/4 bg-gray-800 text-white p-6 flex flex-col justify-between">
         {/* Top Section: Home Button */}
-        <div className="mb-6">
+        <div className="mb-6 flex justify-center">
           <Link href="/">
-            <button className="font-bold flex items-center space-x-2">
-              <FaHome className="text-xl" />
-              <span>Go to Home Page</span>
+            <button className="flex items-center space-x-3 text-lg font-bold px-4 py-2">
+              <FaHome className="text-3xl" />
+              <span>Home</span>
             </button>
           </Link>
         </div>
@@ -89,7 +89,7 @@ export default function Controls() {
           
         </div>
       </div>
-
+          
       {/* Messages Section */}
       <Messages />
     </div>

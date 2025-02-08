@@ -813,10 +813,26 @@ a:focus {
   height: 100%;
 }
 
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Ensure page takes full height */
+}
+
+.content-wrap {
+  flex: 1;
+  /* Pushes footer to the bottom */
+}
+
 .info_section {
   background-color: #04233b;
   color: #ffffff;
-  padding: 45px 0 15px 0;
+  padding: 20px 0;
+  /* Reduce padding if needed */
+  margin-top: auto;
+  /* Ensures footer stays at the bottom */
+  text-align: center;
 }
 
 .info_section h4 {

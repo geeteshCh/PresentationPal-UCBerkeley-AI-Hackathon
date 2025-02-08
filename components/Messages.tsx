@@ -14,7 +14,7 @@ export default function Messages() {
   }, [messages]);
 
   return (
-    <div className="p-6 bg-white min-h-screen flex justify-center items-center">
+    <div className="bg-white min-h-screen flex flex-col">
       <div className="w-[80vw] h-[80vh] flex flex-col bg-gradient-to-br from-white-50 to-white-100 rounded-lg overflow-hidden">
         {/* Message Panel */}
         <div
