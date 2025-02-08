@@ -3,7 +3,7 @@ import { useVoice } from "@humeai/voice-react";
 import { useState, useEffect, useRef } from "react";
 
 export default function Messages() {
-  const { messages, isListening } = useVoice();
+  const { messages } = useVoice();
   /* const messages = [
     { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
     { type: "user_message", message: { content: "Hi, I need help with my account." } },

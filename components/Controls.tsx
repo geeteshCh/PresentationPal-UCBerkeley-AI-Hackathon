@@ -7,7 +7,7 @@ import Messages from "./Messages";
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Controls() {
-  const { connect, disconnect, readyState, lastUserMessage, lastVoiceMessage, isPlaying } = useVoice();
+  const { connect, disconnect, readyState, lastUserMessage, lastVoiceMessage, isPlaying, isMuted} = useVoice();
 
   return (
     <div className="flex min-h-screen">
@@ -26,21 +26,20 @@ export default function Controls() {
         {/* Bottom Section: Microphone Button and AI Talking Indicator */}
         <div className="flex flex-col items-center">
 
-          {/* AI Talking Indicator */}
           <AnimatePresence>
             {isPlaying && (
               <motion.p
-                className="text-white mt-2"
+                className="text-white mt-2 mb-2"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
-                🗣️ AI is Talking...
+                🗣️ AI is interacting...
               </motion.p>
             )}
           </AnimatePresence>
-          
+
           <div className="flex justify-center items-center space-x-4">
             <motion.button
               className="p-4 rounded-full bg-white shadow-lg hover:shadow-xl transition-shadow"
@@ -81,7 +80,13 @@ export default function Controls() {
               </AnimatePresence>
             </motion.button>
           </div>
-
+          
+          {readyState === VoiceReadyState.OPEN ? (
+            <div>Microphone is active</div>
+          ) : (
+            <div>You are on Mute.</div>
+          )}
+          
         </div>
       </div>
 
