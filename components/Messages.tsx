@@ -4,41 +4,6 @@ import { useState, useEffect, useRef } from "react";
 
 export default function Messages() {
   const { messages } = useVoice();
-  /* const messages = [
-    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
-    { type: "user_message", message: { content: "Hi, I need help with my account." } },
-    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
-    { type: "user_message", message: { content: "I can't log in." } },
-    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
-    { type: "user_message", message: { content: "Hi, I need help with my account." } },
-    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
-    { type: "user_message", message: { content: "I can't log in." } },
-    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
-    { type: "user_message", message: { content: "Hi, I need help with my account." } },
-    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
-    { type: "user_message", message: { content: "I can't log in." } },
-    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
-    { type: "user_message", message: { content: "Hi, I need help with my account." } },
-    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
-    { type: "user_message", message: { content: "I can't log in." } },
-    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
-    { type: "user_message", message: { content: "Hi, I need help with my account." } },
-    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
-    { type: "user_message", message: { content: "I can't log in." } },
-    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
-    { type: "user_message", message: { content: "Hi, I need help with my account." } },
-    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
-    { type: "user_message", message: { content: "I can't log in." } },
-    { type: "ai_message", message: { content: "Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today?Hello! How can I assist you today?Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? " } },
-    { type: "user_message", message: { content: "Hi, I need help with my account." } },
-    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
-    { type: "user_message", message: { content: "I can't log in." } },
-    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
-    { type: "user_message", message: { content: "Hi, I need help with my account." } },
-    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
-    { type: "user_message", message: { content: "I can't log in." } }
-    // Add more messages to test scrolling
-  ];*/
   const messagesRef = useRef(null);
 
   // Auto-scroll to the latest message
