@@ -1,44 +1,114 @@
 "use client";
 import { useVoice } from "@humeai/voice-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function Messages() {
   const { messages, isListening } = useVoice();
+  /* const messages = [
+    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
+    { type: "user_message", message: { content: "Hi, I need help with my account." } },
+    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
+    { type: "user_message", message: { content: "I can't log in." } },
+    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
+    { type: "user_message", message: { content: "Hi, I need help with my account." } },
+    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
+    { type: "user_message", message: { content: "I can't log in." } },
+    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
+    { type: "user_message", message: { content: "Hi, I need help with my account." } },
+    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
+    { type: "user_message", message: { content: "I can't log in." } },
+    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
+    { type: "user_message", message: { content: "Hi, I need help with my account." } },
+    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
+    { type: "user_message", message: { content: "I can't log in." } },
+    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
+    { type: "user_message", message: { content: "Hi, I need help with my account." } },
+    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
+    { type: "user_message", message: { content: "I can't log in." } },
+    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
+    { type: "user_message", message: { content: "Hi, I need help with my account." } },
+    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
+    { type: "user_message", message: { content: "I can't log in." } },
+    { type: "ai_message", message: { content: "Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today?Hello! How can I assist you today?Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? Hello! How can I assist you today? " } },
+    { type: "user_message", message: { content: "Hi, I need help with my account." } },
+    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
+    { type: "user_message", message: { content: "I can't log in." } },
+    { type: "ai_message", message: { content: "Hello! How can I assist you today?" } },
+    { type: "user_message", message: { content: "Hi, I need help with my account." } },
+    { type: "ai_message", message: { content: "Sure, I can help with that. What's the issue?" } },
+    { type: "user_message", message: { content: "I can't log in." } }
+    // Add more messages to test scrolling
+  ];*/
+  const messagesRef = useRef(null);
+
+  // Auto-scroll to the latest message
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   return (
-    <div className="p-6 bg-white min-h-screen flex flex-col">
-      <div className="flex flex-col gap-4 mt-4">
-        {messages.map((msg, index) => {
-          if (!msg || !msg.message || !msg.message.content) {
-            return null;
-          }
-
-          const isUser = msg.type === "user_message";
-          const bubbleClasses = isUser
-            ? "bg-blue-100 text-gray-800 rounded-lg p-4 shadow"
-            : "bg-gray-100 text-gray-800 rounded-lg p-4 shadow";
-
-          const containerClasses = isUser ? "justify-end" : "justify-start";
-
-          return (
-            <div key={msg.type + index} className={`flex ${containerClasses} mb-2`}>
-              <div className="flex items-center gap-4 max-w-md">
-                {!isUser && (
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                    <span className="text-lg font-bold">🤖</span>
+    <div className="p-6 bg-white min-h-screen flex justify-center items-center">
+      <div className="w-[80vw] h-[80vh] flex flex-col bg-gradient-to-br from-white-50 to-white-100 rounded-lg overflow-hidden">
+        {/* Message Panel */}
+        <div
+          ref={messagesRef}
+          className="flex-1 overflow-y-auto p-6 space-y-4"
+        >
+          {messages.map((msg, index) => {
+            if (!msg || !msg.message || !msg.message.content) return null;
+  
+            const isUserMessage = msg.type === "user_message";
+            const messageClass = isUserMessage
+              ? "bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg self-end"
+              : "bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 rounded-lg self-start";
+            const icon = isUserMessage ? "👤" : "🤖";
+  
+            return (
+              <div key={index} className={`flex ${isUserMessage ? "justify-end" : "justify-start"}`}>
+                {/* Icon for AI, comes before the message */}
+                {!isUserMessage && (
+                  <div className="w-12 h-12 mr-3 flex items-center justify-center rounded-full bg-gradient-to-r from-gray-100 to-gray-200 shadow-lg">
+                    <span className="text-xl">{icon}</span>
                   </div>
                 )}
-                <div className={`${bubbleClasses} mt-2`}>{msg.message.content}</div>
-                {isUser && (
-                  <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                    <span className="text-lg font-bold">👤</span>
+  
+                {/* Message Content Box */}
+                <div className={`max-w-[70%] p-4 ${messageClass} shadow-lg rounded-lg`}>
+                  <p className="text-sm">{msg.message.content}</p>
+                </div>
+  
+                {/* Icon for User, comes after the message */}
+                {isUserMessage && (
+                  <div className="w-12 h-12 ml-3 flex items-center justify-center rounded-full bg-gradient-to-r from-gray-100 to-gray-200 shadow-lg">
+                    <span className="text-xl">{icon}</span>
                   </div>
                 )}
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+  
+
+       {/* Custom Scrollbar Styles */}
+       <style jsx>{`
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: #6b7280;
+          border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background-color: #4b5563;
+        }
+        ::-webkit-scrollbar-track {
+          background: #f3f4f6;
+        }
+      `}</style>
+    </div>
     </div>
   );
-}
+};
+

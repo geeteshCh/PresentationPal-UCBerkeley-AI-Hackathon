@@ -80,7 +80,9 @@ const HomePage = () => {
                     <div className="detail-box">
                       <h5>Complete Rework</h5>
                       <p>Bigger changes if you have more time until your presentation</p>
-                      <Link href="/character-1"><button>Try Now</button></Link>
+                      <Link href="/character-1" target="_blank" rel="noopener noreferrer">
+                        <button>Try Now</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -92,7 +94,9 @@ const HomePage = () => {
                     <div className="detail-box">
                       <h5>Polish Up</h5>
                       <p>Minimal edits, meant for last minute presentations</p>
-                      <Link href="/character-2"><button>Try Now</button></Link>
+                      <Link href="/character-2" target="_blank" rel="noopener noreferrer">
+                        <button>Try Now</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -104,7 +108,9 @@ const HomePage = () => {
                     <div className="detail-box">
                       <h5>Shakesphere</h5>
                       <p>Get help from Shakesphere himself to improve your presentation</p>
-                      <Link href="/character-3"><button>Try Now</button></Link>
+                      <Link href="/character-3" target="_blank" rel="noopener noreferrer">
+                        <button>Try Now</button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -138,7 +144,7 @@ const HomePage = () => {
               </div>
               <div className="col-md-1 col-lg-3 info_col">
                 <div>
-                  <h2>Powered by  Hume AI</h2>
+                  <h2>Powered by Hume AI</h2>
                 </div>
               </div>
               
